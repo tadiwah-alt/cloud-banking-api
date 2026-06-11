@@ -1,41 +1,44 @@
-<<<<<<< HEAD
-# cloud-banking-api
-=======
 # Cloud Banking API
 
-A containerized banking platform built using Docker, Flask, Nginx, and PostgreSQL.
+A containerized banking platform built with Docker, Flask, Nginx, and PostgreSQL.
 
 ## Architecture
 
+```text
 Browser
-↓
+  ↓
 Nginx Reverse Proxy
-↓
+  ↓
 Flask API
-↓
+  ↓
 PostgreSQL
-↓
+  ↓
 Docker Volume
+```
 
 ## Features
 
-- Multi-container architecture
-- Docker Compose orchestration
-- Nginx reverse proxy
-- PostgreSQL database
-- Persistent Docker volumes
-- REST API endpoints
-- Internal container networking
+- Multi-container architecture.
+- Docker Compose orchestration.
+- Nginx reverse proxy.
+- PostgreSQL database.
+- Persistent Docker volumes.
+- REST API endpoints.
+- Internal container networking.
 
 ## Endpoints
 
 ### Get all accounts
 
+```http
 GET /accounts
+```
 
 ### Get balance
 
+```http
 GET /balance/<id>
+```
 
 ## Technologies
 
@@ -54,13 +57,12 @@ docker compose up --build
 
 Then open:
 
-```txt
+```text
 http://localhost/accounts
 ```
 
-or
+or:
 
-```txt
+```text
 http://localhost/balance/1
 ```
->>>>>>> ee0d37b (Initial commit)

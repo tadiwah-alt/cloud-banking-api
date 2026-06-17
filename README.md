@@ -56,9 +56,26 @@ GET /accounts
 ### Get balance
 
 ```http
-GET /balance/<id>
+GET /balance/<id
 ```
 
+### Deposit
+
+```http
+POST /deposit
+```
+
+### Withdraw
+
+```http
+POST /withdraw
+```
+
+### Transfer
+
+```http
+POST /transfer
+```
 
 ## Technologies
 

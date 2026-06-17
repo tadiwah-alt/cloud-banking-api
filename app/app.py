@@ -329,8 +329,49 @@ def transfer():
 
 
 
+@app.route("/transactions")
+def transactions():
+
+    conn = get_connection()
+    cur = conn.cursor()
+
+    cur.execute("""
+        SELECT id,
+               from_account_id,
+               to_account_id,
+               transaction_type,
+               amount,
+               created_at
+        FROM transactions
+        ORDER BY created_at DESC;
+    """)
+
+    rows = cur.fetchall()
+
+    cur.close()
+    conn.close()
+
+    results = []
+
+    for row in rows:
+        results.append({
+            "id": row[0],
+            "from_account_id": row[1],
+            "to_account_id": row[2],
+            "transaction_type": row[3],
+            "amount": row[4],
+            "created_at": row[5]
+        })
+
+    return jsonify(results)
+
+
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
+
+
 
 
 

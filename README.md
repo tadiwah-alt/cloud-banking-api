@@ -6,14 +6,13 @@ A containerized banking platform built with Docker, Flask, Nginx, and PostgreSQL
 ## Overview
 
 This project demonstrates a production-style multi-container architecture using Docker Compose. Requests are routed through an Nginx reverse proxy to a Flask API, which communicates with a PostgreSQL database. Database data is persisted using Docker volumes.
-=======
+
 
 
 ## Architecture
 
 ```text
 Browser
-<<<<<<< HEAD
    │
    ▼
 Nginx Reverse Proxy
@@ -115,7 +114,6 @@ or:
 
 ```text
 http://localhost/balance/1
-<<<<<<< HEAD
 ```
 
 ## Future Enhancements

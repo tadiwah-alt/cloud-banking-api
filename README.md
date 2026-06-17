@@ -126,9 +126,6 @@ http://localhost/balance/1
 
 ## Future Enhancements
 
-- Deposit endpoint
-- Withdrawal endpoint
-- Transfer endpoint
 - Transaction history
 - Redis caching
 - JWT authentication

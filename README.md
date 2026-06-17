@@ -77,6 +77,13 @@ POST /withdraw
 POST /transfer
 ```
 
+### Transaction History
+
+```http
+GET /transactions
+```
+
+
 ## Technologies
 
 - Docker
@@ -126,7 +133,6 @@ http://localhost/balance/1
 
 ## Future Enhancements
 
-- Transaction history
 - Redis caching
 - JWT authentication
 - Health checks and monitoring

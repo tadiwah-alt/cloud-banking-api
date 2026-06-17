@@ -24,14 +24,6 @@ Flask API
 PostgreSQL Database
    │
    ▼
-=======
-  ↓
-Nginx Reverse Proxy
-  ↓
-Flask API
-  ↓
-PostgreSQL
-  ↓
 Docker Volume
 ```
 
@@ -45,7 +37,6 @@ Docker Volume
 - Persistent storage with Docker volumes
 - Internal Docker networking
 - Account and balance retrieval endpoints
-=======
 - Multi-container architecture.
 - Docker Compose orchestration.
 - Nginx reverse proxy.

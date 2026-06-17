@@ -7,7 +7,7 @@ A containerized banking platform built with Docker, Flask, Nginx, and PostgreSQL
 
 This project demonstrates a production-style multi-container architecture using Docker Compose. Requests are routed through an Nginx reverse proxy to a Flask API, which communicates with a PostgreSQL database. Database data is persisted using Docker volumes.
 =======
->>>>>>> 98c5647 (Add deposit withdraw and transfer endpoints)
+
 
 ## Architecture
 
@@ -33,7 +33,6 @@ Flask API
   ↓
 PostgreSQL
   ↓
->>>>>>> 98c5647 (Add deposit withdraw and transfer endpoints)
 Docker Volume
 ```
 
@@ -135,4 +134,4 @@ Tadiwa Hukuimwe
 Cybersecurity | Cloud & Security Enthusiast
 =======
 ```
->>>>>>> 98c5647 (Add deposit withdraw and transfer endpoints)
+

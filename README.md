@@ -1,7 +1,7 @@
 # Cloud Banking API
 
 A containerized banking platform built with Docker, Flask, Nginx, and PostgreSQL.
-<<<<<<< HEAD
+
 
 ## Overview
 
@@ -38,7 +38,7 @@ Docker Volume
 
 ## Features
 
-<<<<<<< HEAD
+
 - Multi-container Docker architecture
 - Nginx reverse proxy
 - Flask REST API
@@ -68,7 +68,7 @@ GET /accounts
 ```http
 GET /balance/<id>
 ```
->>>>>>> 98c5647 (Add deposit withdraw and transfer endpoints)
+
 
 ## Technologies
 
@@ -132,6 +132,5 @@ http://localhost/balance/1
 
 Tadiwa Hukuimwe
 Cybersecurity | Cloud & Security Enthusiast
-=======
-```
+
 

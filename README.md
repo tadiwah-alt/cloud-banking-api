@@ -134,12 +134,12 @@ Example Response
     {
         "id":1,
         "name":"Alice",
-        "balance":500
+        "balance":800
     },
     {
         "id":2,
         "name":"Bob",
-        "balance":1200
+        "balance":1250
     }
 ]
 ```
@@ -163,7 +163,7 @@ Response
 ```json
 {
     "account_id":"1",
-    "balance":500
+    "balance":800
 }
 ```
 
@@ -180,7 +180,7 @@ Request
 ```json
 {
     "account_id":1,
-    "amount":200
+    "amount":150
 }
 ```
 
@@ -191,7 +191,7 @@ Invoke-RestMethod `
     -Uri http://localhost/deposit `
     -Method POST `
     -ContentType "application/json" `
-    -Body '{"account_id":1,"amount":200}'
+    -Body '{"account_id":1,"amount":150}'
 ```
 
 Response
@@ -200,8 +200,8 @@ Response
 {
     "success":true,
     "account_id":1,
-    "deposited":200,
-    "new_balance":700
+    "deposited":150,
+    "new_balance":950
 }
 ```
 
@@ -257,7 +257,7 @@ Invoke-RestMethod `
     -Uri http://localhost/transfer `
     -Method POST `
     -ContentType "application/json" `
-    -Body '{"from_account_id":1,"to_account_id":2,"amount":100}'
+    -Body '{"from_account_id":1,"to_account_id":2,"amount":50}'
 ```
 
 Response

@@ -305,7 +305,7 @@ Example Response
         "from_account_id":1,
         "to_account_id":2,
         "transaction_type":"TRANSFER",
-        "amount":100,
+        "amount":50,
         "created_at":"2026-06-29T18:30:00"
     }
 ]

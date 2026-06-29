@@ -261,9 +261,9 @@ Example Response:
 
 ![Docker Containers](screenshots/docker-containers.png)
 
-### Accounts Endpoint
+### Wiithdraw Example
 
-![Accounts](screenshots/accounts-endpoint.png)
+![Withdraw](screenshots/withdraw-example.png)
 
 ### Transfer Example
 

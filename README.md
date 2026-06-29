@@ -232,6 +232,17 @@ Invoke-RestMethod `
     -Body '{"account_id":1,"amount":100}'
 ```
 
+Response
+
+```json
+{
+    "success":true,
+    "account_id":1,
+    "deposited":100,
+    "new_balance":850
+}
+```
+
 ---
 
 ## Transfer Funds
@@ -246,7 +257,7 @@ Request
 {
     "from_account_id":1,
     "to_account_id":2,
-    "amount":100
+    "amount":50
 }
 ```
 

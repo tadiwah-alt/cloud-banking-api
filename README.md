@@ -261,7 +261,7 @@ Example Response:
 
 ![Docker Containers](screenshots/docker-containers.png)
 
-### Wiithdraw Example
+### Withdraw Example
 
 ![Withdraw](screenshots/withdraw-example.png)
 
@@ -269,10 +269,9 @@ Example Response:
 
 ![Transfer](screenshots/transfer-example.png)
 
-### Transaction History
+### Deposit Example
 
-![Transactions](screenshots/transactions-history.png)
-
+![Deposit](screenshots/deposit-example.png)
 
 
 

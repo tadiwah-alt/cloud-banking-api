@@ -521,7 +521,6 @@ Cybersecurity Graduate | Cloud Security Enthusiast | Backend & Cloud Engineering
 
 GitHub: https://github.com/tadiwah-alt
 
-LinkedIn: *(Add your LinkedIn URL here)*
 
 ---
 

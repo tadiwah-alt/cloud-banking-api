@@ -254,6 +254,28 @@ Example Response:
 
 ---
 
+
+## Screenshots
+
+### Docker Containers
+
+![Docker Containers](screenshots/docker-containers.png)
+
+### Accounts Endpoint
+
+![Accounts](screenshots/accounts-endpoint.png)
+
+### Transfer Example
+
+![Transfer](screenshots/transfer-example.png)
+
+### Transaction History
+
+![Transactions](screenshots/transactions-history.png)
+
+
+
+
 ## Running Locally
 
 ### Clone Repository

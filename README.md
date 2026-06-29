@@ -265,10 +265,10 @@ Response
 ```json
 {
     "success":true,
-    "transferred":100,
+    "transferred":50,
     "from_account":{
         "account_id":1,
-        "new_balance":400
+        "new_balance":800
     },
     "to_account":{
         "account_id":2,

@@ -1,80 +1,102 @@
 # Cloud Banking API
 
-A containerized banking platform built with Docker, Flask, Nginx, and PostgreSQL.
+A production-style containerized banking backend built with **Docker**, **Docker Compose**, **Flask**, **PostgreSQL**, and **Nginx**.
 
-## Overview
-
-Cloud Banking API is a backend banking application designed to demonstrate modern containerized application architecture. The project uses Docker Compose to orchestrate multiple services, including a Flask API, PostgreSQL database, and Nginx reverse proxy.
-
-The application supports account management, deposits, withdrawals, transfers, and transaction history tracking while maintaining persistent storage through Docker volumes.
+This project demonstrates how modern backend services communicate inside a Docker network while exposing a secure REST API through a reverse proxy. It implements common banking operations including deposits, withdrawals, account-to-account transfers, and transaction auditing.
 
 ---
 
-## Architecture
+## Project Overview
 
-```text
-Browser
-   │
-   ▼
-Nginx Reverse Proxy
-   │
-   ▼
-Flask API
-   │
-   ▼
-PostgreSQL Database
-   │
-   ▼
-Docker Volume
+Cloud Banking API is a multi-container backend application designed to simulate the core functionality of a banking system.
+
+The application demonstrates:
+
+- Containerized microservice-style architecture
+- RESTful API development with Flask
+- PostgreSQL database integration
+- Docker networking and service discovery
+- Persistent database storage using Docker Volumes
+- Reverse proxy architecture using Nginx
+- Transaction logging and audit history
+
+This project was built as part of my backend and cloud engineering portfolio to strengthen my knowledge of Docker, networking, databases, and production-style application architecture.
+
+---
+
+# Architecture
+
+```
+                    Internet
+                        │
+                        ▼
+                  Web Browser
+                        │
+                        ▼
+              Nginx Reverse Proxy
+                        │
+                        ▼
+                 Flask REST API
+                        │
+                        ▼
+               PostgreSQL Database
+                        │
+                        ▼
+                 Docker Volume
+               (Persistent Storage)
 ```
 
-### Request Flow
+---
 
-1. User sends a request from a web browser or API client.
-2. Nginx receives the request and forwards it to Flask.
-3. Flask processes the request and executes business logic.
-4. PostgreSQL stores and retrieves account data.
-5. Docker volumes persist database data across container restarts.
-6. Flask returns a JSON response to the client.
+## Request Flow
+
+1. A client sends an HTTP request from the browser or an API client.
+2. Nginx receives the request on port **80**.
+3. Nginx forwards the request to the Flask application running inside Docker.
+4. Flask executes the requested business logic.
+5. PostgreSQL stores or retrieves account information.
+6. Flask returns a JSON response.
+7. Nginx sends the response back to the client.
 
 ---
 
-## Features
+# Technologies
+
+| Technology | Purpose |
+|------------|---------|
+| Docker | Containerization |
+| Docker Compose | Multi-container orchestration |
+| Python | Backend programming language |
+| Flask | REST API framework |
+| PostgreSQL | Relational database |
+| Nginx | Reverse proxy |
+| Docker Volumes | Persistent database storage |
+
+---
+
+# Features
 
 - Multi-container Docker architecture
 - Docker Compose orchestration
 - Nginx reverse proxy
 - Flask REST API
-- PostgreSQL database integration
+- PostgreSQL integration
 - Persistent Docker volumes
 - Internal Docker networking
-- Account balance management
-- Deposit operations
-- Withdrawal operations
-- Account-to-account transfers
-- Transaction audit logging
+- Account management
+- Deposit funds
+- Withdraw funds
+- Transfer funds between accounts
+- Transaction history
 - JSON API responses
-- Input validation and error handling
+- Input validation
+- Error handling
 
 ---
 
-## Technology Stack
+# Database Schema
 
-| Technology | Purpose |
-|------------|----------|
-| Docker | Containerization |
-| Docker Compose | Service orchestration |
-| Python | Application language |
-| Flask | REST API framework |
-| PostgreSQL | Relational database |
-| Nginx | Reverse proxy |
-| Docker Volumes | Persistent storage |
-
----
-
-## Database Schema
-
-### Accounts Table
+## Accounts
 
 | Column | Type |
 |----------|----------|
@@ -82,7 +104,9 @@ Docker Volume
 | name | VARCHAR(100) |
 | balance | INTEGER |
 
-### Transactions Table
+---
+
+## Transactions
 
 | Column | Type |
 |----------|----------|
@@ -95,335 +119,401 @@ Docker Volume
 
 ---
 
-## API Endpoints
+# API Endpoints
 
-### Get All Accounts
+## Get All Accounts
 
 ```http
 GET /accounts
 ```
 
-Example Response:
+Example Response
 
 ```json
 [
-  {
-    "id": 1,
-    "name": "Alice",
-    "balance": 500
-  }
+    {
+        "id":1,
+        "name":"Alice",
+        "balance":500
+    },
+    {
+        "id":2,
+        "name":"Bob",
+        "balance":1200
+    }
 ]
 ```
 
 ---
 
-### Get Account Balance
+## Get Account Balance
 
 ```http
 GET /balance/<id>
 ```
 
-Example:
+Example
 
 ```http
 GET /balance/1
 ```
 
-Response:
+Response
 
 ```json
 {
-  "account_id": "1",
-  "balance": 500
+    "account_id":"1",
+    "balance":500
 }
 ```
 
 ---
 
-### Deposit Funds
+## Deposit Funds
 
 ```http
 POST /deposit
 ```
 
-Request Body:
+Request
 
 ```json
 {
-  "account_id": 1,
-  "amount": 200
+    "account_id":1,
+    "amount":200
 }
 ```
 
-Response:
+Example (PowerShell)
+
+```powershell
+Invoke-RestMethod `
+    -Uri http://localhost/deposit `
+    -Method POST `
+    -ContentType "application/json" `
+    -Body '{"account_id":1,"amount":200}'
+```
+
+Response
 
 ```json
 {
-  "success": true,
-  "account_id": 1,
-  "deposited": 200,
-  "new_balance": 700
+    "success":true,
+    "account_id":1,
+    "deposited":200,
+    "new_balance":700
 }
 ```
 
 ---
 
-### Withdraw Funds
+## Withdraw Funds
 
 ```http
 POST /withdraw
 ```
 
-Request Body:
+Request
 
 ```json
 {
-  "account_id": 1,
-  "amount": 100
+    "account_id":1,
+    "amount":100
 }
 ```
 
-Response:
+Example (PowerShell)
 
-```json
-{
-  "success": true,
-  "account_id": 1,
-  "withdrawn": 100,
-  "new_balance": 600
-}
+```powershell
+Invoke-RestMethod `
+    -Uri http://localhost/withdraw `
+    -Method POST `
+    -ContentType "application/json" `
+    -Body '{"account_id":1,"amount":100}'
 ```
 
 ---
 
-### Transfer Funds
+## Transfer Funds
 
 ```http
 POST /transfer
 ```
 
-Request Body:
+Request
 
 ```json
 {
-  "from_account_id": 1,
-  "to_account_id": 2,
-  "amount": 100
+    "from_account_id":1,
+    "to_account_id":2,
+    "amount":100
 }
 ```
 
-Response:
+Example (PowerShell)
+
+```powershell
+Invoke-RestMethod `
+    -Uri http://localhost/transfer `
+    -Method POST `
+    -ContentType "application/json" `
+    -Body '{"from_account_id":1,"to_account_id":2,"amount":100}'
+```
+
+Response
 
 ```json
 {
-  "success": true,
-  "transferred": 100,
-  "from_account": {
-    "account_id": 1,
-    "new_balance": 400
-  },
-  "to_account": {
-    "account_id": 2,
-    "new_balance": 1300
-  }
+    "success":true,
+    "transferred":100,
+    "from_account":{
+        "account_id":1,
+        "new_balance":400
+    },
+    "to_account":{
+        "account_id":2,
+        "new_balance":1300
+    }
 }
 ```
 
 ---
 
-### View Transaction History
+## Transaction History
 
 ```http
 GET /transactions
 ```
 
-Example Response:
+Example Response
 
 ```json
 [
-  {
-    "id": 3,
-    "from_account_id": 1,
-    "to_account_id": 2,
-    "transaction_type": "TRANSFER",
-    "amount": 100,
-    "created_at": "2026-06-17T12:30:00"
-  }
+    {
+        "id":3,
+        "from_account_id":1,
+        "to_account_id":2,
+        "transaction_type":"TRANSFER",
+        "amount":100,
+        "created_at":"2026-06-29T18:30:00"
+    }
 ]
 ```
 
 ---
 
+# Screenshots
 
-## Screenshots
+## Docker Containers
 
-### Docker Containers
+> Demonstrates the multi-container application running with Nginx, Flask, and PostgreSQL.
 
 ![Docker Containers](screenshots/docker-containers.png)
 
-### Deposit Example
+---
+
+## Accounts Endpoint
+
+> Retrieve all customer accounts from PostgreSQL.
+
+![Accounts](screenshots/accounts-endpoint.png)
+
+---
+
+## Deposit Example
+
+> Successfully deposits funds into an account and updates the database.
 
 ![Deposit](screenshots/deposit-example.png)
 
-### Withdraw Example
+---
+
+## Withdraw Example
+
+> Withdraws funds after validating sufficient balance.
 
 ![Withdraw](screenshots/withdraw-example.png)
 
-### Transfer Example
+---
+
+## Transfer Example
+
+> Transfers money between two accounts while recording a transaction audit entry.
 
 ![Transfer](screenshots/transfer-example.png)
 
+---
 
+## Transaction History
 
+> Displays the audit log of all deposits, withdrawals, and transfers.
 
-## Running Locally
+![Transactions](screenshots/transactions-history.png)
 
-### Clone Repository
+---
+
+# Running Locally
+
+Clone the repository
 
 ```bash
 git clone https://github.com/tadiwah-alt/cloud-banking-api.git
+
 cd cloud-banking-api
 ```
 
-### Start Application
+Start the application
 
 ```bash
 docker compose up --build
 ```
 
-### Access Application
+The application will be available at
 
-Accounts:
+```
+http://localhost
+```
 
-```text
+Example endpoints
+
+```
 http://localhost/accounts
-```
 
-Balance:
-
-```text
 http://localhost/balance/1
-```
 
-Transactions:
-
-```text
 http://localhost/transactions
 ```
 
 ---
 
-## Docker Components
+# Docker Components
 
-### Nginx Container
+## Nginx
 
-Responsibilities:
-
-- Internet-facing service
-- Receives browser requests
-- Forwards requests to Flask
-
-### Flask Container
-
-Responsibilities:
-
-- Business logic
-- API endpoints
-- Database communication
-
-### PostgreSQL Container
-
-Responsibilities:
-
-- Stores account information
-- Stores transaction history
-- Handles SQL queries
-
-### Docker Volume
-
-Responsibilities:
-
-- Persists PostgreSQL data
-- Survives container recreation
-- Prevents data loss
+- Public-facing container
+- Receives HTTP requests
+- Reverse proxies requests to Flask
 
 ---
 
-## Example Banking Workflow
+## Flask
 
-Starting balances:
+- Implements business logic
+- Exposes REST endpoints
+- Connects to PostgreSQL
 
-```text
-Alice   = 500
-Bob     = 1200
-Charlie = 300
+---
+
+## PostgreSQL
+
+- Stores account information
+- Stores transaction history
+- Executes SQL queries
+
+---
+
+## Docker Volume
+
+- Persists database data
+- Prevents data loss after container recreation
+
+---
+
+# Example Banking Workflow
+
+Initial State
+
+```
+Alice      500
+
+Bob       1200
+
+Charlie    300
 ```
 
-Operations:
+Operations
 
 1. Deposit $200 into Alice
+
 2. Withdraw $50 from Alice
+
 3. Transfer $100 from Alice to Bob
 
-Final balances:
+Final Balances
 
-```text
-Alice   = 550
-Bob     = 1300
-Charlie = 300
+```
+Alice      550
+
+Bob       1300
+
+Charlie    300
 ```
 
-Transaction records created:
+Transaction Records Created
 
-```text
+```
 DEPOSIT
+
 WITHDRAW
+
 TRANSFER
 ```
 
-Total transaction rows:
+Total Transactions
 
-```text
+```
 3
 ```
 
 ---
 
-## Technical Concepts Demonstrated
+# Technical Concepts Demonstrated
 
+- Docker Containers
+- Docker Compose
 - Docker Networking
-- Container Communication
+- Internal DNS
 - Reverse Proxy Architecture
-- REST API Design
+- REST API Development
+- PostgreSQL Integration
 - Database Transactions
 - ACID Principles
 - Persistent Storage
+- Service-to-Service Communication
+- JSON APIs
 - Input Validation
 - Error Handling
-- Multi-Service Applications
 
 ---
 
-## Future Enhancements
+# Future Enhancements
 
-- JWT Authentication
-- User Registration and Login
-- Transaction Filtering
-- Redis Caching
-- Row-Level Database Locking
-- Health Checks
-- Monitoring and Logging
+- Filter transaction history by account
+- User registration
+- JWT authentication
+- Role-based authorization
+- Redis caching
+- Row-level locking (`SELECT ... FOR UPDATE`)
+- Database migrations
+- Health check endpoints
 - GitHub Actions CI/CD
-- AWS ECS Deployment
-- Kubernetes Deployment
+- AWS deployment (ECS)
+- Kubernetes deployment
 
 ---
 
-## Author
+# Author
 
 **Tadiwa Hukuimwe**
 
 Cybersecurity Graduate | Cloud Security Enthusiast | Backend & Cloud Engineering
 
-GitHub:
-https://github.com/tadiwah-alt
+GitHub: https://github.com/tadiwah-alt
+
+LinkedIn: *(Add your LinkedIn URL here)*
+
+---
+
+## License
+
+This project is licensed under the MIT License.

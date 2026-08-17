@@ -1,14 +1,14 @@
 # Cloud Banking API
 
-A production-style containerized banking backend built with **Docker**, **Docker Compose**, **Flask**, **PostgreSQL**, and **Nginx**.
+A production-style, full-stack banking platform built with **Docker**, **Docker Compose**, **Flask**, **PostgreSQL**, **Nginx**, and a **React/Vite** frontend.
 
-This project demonstrates how modern backend services communicate inside a Docker network while exposing a secure REST API through a reverse proxy. It implements common banking operations including deposits, withdrawals, account-to-account transfers, and transaction auditing.
+This project demonstrates how modern backend services communicate inside a Docker network while exposing a secure REST API through a reverse proxy — paired with a polished, themed React frontend that consumes that API. It implements common banking operations including deposits, withdrawals, account-to-account transfers, and transaction auditing.
 
 ---
 
 ## Project Overview
 
-Cloud Banking API is a multi-container backend application designed to simulate the core functionality of a banking system.
+Cloud Banking API is a multi-container full-stack application designed to simulate the core functionality of a banking system, end to end — from the database up through a real, usable interface.
 
 The application demonstrates:
 
@@ -19,8 +19,9 @@ The application demonstrates:
 - Persistent database storage using Docker Volumes
 - Reverse proxy architecture using Nginx
 - Transaction logging and audit history
+- A React/Vite frontend consuming the API, with a custom African-themed design system
 
-This project was built as part of my backend and cloud engineering portfolio to strengthen my knowledge of Docker, networking, databases, and production-style application architecture.
+This project was built as part of my backend and cloud engineering portfolio to strengthen my knowledge of Docker, networking, databases, production-style application architecture, and full-stack integration.
 
 ---
 
@@ -31,6 +32,9 @@ This project was built as part of my backend and cloud engineering portfolio to 
                         │
                         ▼
                   Web Browser
+                        │
+                        ▼
+          React Frontend (Vite, port 5173 in dev)
                         │
                         ▼
               Nginx Reverse Proxy
@@ -50,7 +54,7 @@ This project was built as part of my backend and cloud engineering portfolio to 
 
 ## Request Flow
 
-1. A client sends an HTTP request from the browser or an API client.
+1. A client sends an HTTP request from the browser (via the React frontend or an API client).
 2. Nginx receives the request on port **80**.
 3. Nginx forwards the request to the Flask application running inside Docker.
 4. Flask executes the requested business logic.
@@ -71,11 +75,15 @@ This project was built as part of my backend and cloud engineering portfolio to 
 | PostgreSQL | Relational database |
 | Nginx | Reverse proxy |
 | Docker Volumes | Persistent database storage |
+| React | Frontend UI framework |
+| Vite | Frontend build tool & dev server |
+| Tailwind CSS | Utility-first styling |
 
 ---
 
 # Features
 
+**Backend**
 - Multi-container Docker architecture
 - Docker Compose orchestration
 - Nginx reverse proxy
@@ -91,6 +99,14 @@ This project was built as part of my backend and cloud engineering portfolio to 
 - JSON API responses
 - Input validation
 - Error handling
+
+**Frontend**
+- Full account overview with live balance data
+- Deposit, withdraw, and transfer forms wired to the live API
+- Transaction history table
+- Custom gold / black / silver design system
+- Big Five animal iconography mapped meaningfully to each banking action (Lion → Overview, Rhino → Deposit, Buffalo → Withdraw, Elephant → Transfer, Leopard → Transactions)
+- African landmark photography (Baobab, Pyramids of Giza, El Djem Amphitheatre, Lake Retba, Mount Kilimanjaro)
 
 ---
 
@@ -238,7 +254,7 @@ Response
 {
     "success":true,
     "account_id":1,
-    "deposited":100,
+    "withdrawn":100,
     "new_balance":850
 }
 ```
@@ -373,13 +389,13 @@ git clone https://github.com/tadiwah-alt/cloud-banking-api.git
 cd cloud-banking-api
 ```
 
-Start the application
+## Backend
 
 ```bash
 docker compose up --build
 ```
 
-The application will be available at
+The API will be available at
 
 ```
 http://localhost
@@ -394,6 +410,26 @@ http://localhost/balance/1
 
 http://localhost/transactions
 ```
+
+## Frontend
+
+In a separate terminal:
+
+```bash
+cd frontend
+
+npm install
+
+npm run dev
+```
+
+The UI will be available at
+
+```
+http://localhost:5173
+```
+
+The frontend expects the backend to already be running via `docker compose up`, since it makes live requests to `http://localhost` for account data.
 
 ---
 
@@ -427,6 +463,19 @@ http://localhost/transactions
 
 - Persists database data
 - Prevents data loss after container recreation
+
+---
+
+# Frontend
+
+The `/frontend` directory contains a React + Vite single-page application that consumes this API.
+
+**Design system:** a gold / black / silver palette built around a Big Five African animal motif, where each animal maps meaningfully to a banking action rather than serving as pure decoration — the Lion (king surveying his kingdom) represents the account Overview, the Rhino (armored, protective) represents Deposit, the Buffalo (forceful) represents Withdraw, the Elephant (migratory) represents Transfer, and the Leopard (a tracker following a trail) represents Transaction history.
+
+**Pages:**
+- **Overview** — total balance, per-account breakdown, and a "Reserves across the continent" gallery featuring the Pyramids of Giza, the El Djem Amphitheatre (Tunisia), Lake Retba (Senegal), and Mount Kilimanjaro (Tanzania)
+- **Deposit / Withdraw / Transfer** — forms wired directly to the live Flask endpoints above
+- **Transactions** — a full audit log table of all account activity
 
 ---
 
@@ -494,10 +543,10 @@ Total Transactions
 - JSON APIs
 - Input Validation
 - Error Handling
+- Frontend/Backend Integration
+- React Component Architecture
 
 ---
-
-Frontend UI added — see /frontend for the React application.
 
 # Future Enhancements
 
@@ -512,6 +561,8 @@ Frontend UI added — see /frontend for the React application.
 - GitHub Actions CI/CD
 - AWS deployment (ECS)
 - Kubernetes deployment
+- Frontend test coverage
+- Live deployed demo link
 
 ---
 
@@ -522,7 +573,6 @@ Frontend UI added — see /frontend for the React application.
 Cybersecurity Graduate | Cloud Security Enthusiast | Backend & Cloud Engineering
 
 GitHub: https://github.com/tadiwah-alt
-
 
 ---
 

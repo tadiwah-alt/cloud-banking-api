@@ -497,6 +497,8 @@ Total Transactions
 
 ---
 
+Frontend UI added — see /frontend for the React application.
+
 # Future Enhancements
 
 - Filter transaction history by account
